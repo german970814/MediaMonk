@@ -25,7 +25,7 @@ export const rootApplicationReducerMap = {
   // user: userReducer,
   // plan: planReducer,
   // common: commonReducer,
-  app: persistReducer<AppState | undefined>(rootPersistConfig, appReducer),
+  app: appReducer,
 };
 
 export const rootReducer: Reducer = combineReducers<ApplicationState>(

@@ -19,6 +19,7 @@ interface HeaderProps {
   border?: boolean;
   margins?: boolean;
   translate?: boolean;
+  backIconColor?: string;
   onBackPress?: () => void;
   titleStyles?: StyleProp<TextStyle>;
   getIconComponent?: () => React.ReactNode;
@@ -33,6 +34,7 @@ const Header: React.FC<HeaderProps> = ({
   margins,
   onBackPress,
   titleStyles,
+  backIconColor,
   getIconComponent,
   renderLeftComponent,
   renderRightComponent,
@@ -77,6 +79,7 @@ const Header: React.FC<HeaderProps> = ({
         {renderLeftComponent?.() ??
           React.cloneElement(IconComponent as any, {
             size: 24,
+            color: backIconColor,
             onPress: onPressBack,
           })}
       </View>
