@@ -1,5 +1,6 @@
-import { useAlbums } from "@md/hooks/app";
 import _ from "lodash";
+import React from "react";
+import { useAlbums } from "@md/hooks/app";
 import { useWindowDimensions } from "react-native";
 import Animated, {
   Extrapolate,
@@ -51,7 +52,6 @@ const Dot = ({
           marginRight: 5,
           borderRadius: 4,
           borderWidth: 0.5,
-          // backgroundColor: color,
           borderColor: "rgb(113, 115, 120)",
         },
       ]}

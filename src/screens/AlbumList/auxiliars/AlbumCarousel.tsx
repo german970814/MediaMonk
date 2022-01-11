@@ -1,21 +1,16 @@
 import _ from "lodash";
 import React from "react";
 import { scale } from "@md/utils";
+import AlbumItem from "./AlbumItem";
 import { useAlbums } from "@md/hooks/app";
-import Animated from "react-native-reanimated";
-import { MaterialIcons } from "@expo/vector-icons";
 import CarouselIndicator from "./CarouselIndicator";
-import { useSharedValue } from "react-native-reanimated";
-import { useDerivedValue } from "react-native-reanimated";
+import { Text, View, useWindowDimensions } from "react-native";
 import { useAnimatedScrollHandler } from "react-native-reanimated";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import {
-  Text,
-  View,
-  Pressable,
-  StyleSheet,
-  useWindowDimensions,
-} from "react-native";
+import Animated, {
+  useSharedValue,
+  useDerivedValue,
+} from "react-native-reanimated";
 
 const GAP = 40;
 
@@ -43,48 +38,13 @@ const AlbumCarousel: React.FC<{}> = () => {
   const renderItem = React.useCallback(
     ({ item, index }: { item: Album; index: number }) => {
       return (
-        <Pressable
-          onPress={() => onPressItem(item)}
-          style={{
-            width: width * 0.6,
-            marginLeft: index === 0 ? GAP * 2 : 0,
-            marginRight: index === albums.length - 1 ? GAP * 2 : 0,
-          }}
-        >
-          <View style={{ height: height * 0.3 }}>
-            <MaterialIcons
-              name="folder"
-              size={scale(210)}
-              color="rgb(78, 79, 83)"
-            />
-            <View
-              style={[
-                StyleSheet.absoluteFillObject,
-                { justifyContent: "flex-end", left: 30, bottom: 70, right: 30 },
-              ]}
-            >
-              <Text
-                style={{
-                  fontWeight: "300",
-                  fontSize: scale(10),
-                  color: "rgb(178, 181, 187)",
-                }}
-              >
-                50 ARCHIVOS
-              </Text>
-              <Text
-                style={{
-                  color: "#FFF",
-                  fontWeight: "600",
-                  fontSize: scale(14),
-                  textTransform: "capitalize",
-                }}
-              >
-                {item.title}
-              </Text>
-            </View>
-          </View>
-        </Pressable>
+        <AlbumItem
+          gap={GAP}
+          item={item}
+          index={index}
+          onPressItem={onPressItem}
+          selectedIndex={selectedIndex}
+        />
       );
     },
     [onPressItem, albums.length]
@@ -94,12 +54,21 @@ const AlbumCarousel: React.FC<{}> = () => {
     return (
       <View
         style={{
+          width,
           height: height * 0.3,
           alignItems: "center",
           justifyContent: "center",
         }}
       >
-        <Text>Este componente está vacío</Text>
+        <Text
+          style={{
+            fontWeight: "400",
+            fontSize: scale(12),
+            color: "rgb(178, 181, 187)",
+          }}
+        >
+          En este momento no hay albumes para mostrar
+        </Text>
       </View>
     );
   }, []);
