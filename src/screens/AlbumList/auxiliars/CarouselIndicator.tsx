@@ -66,10 +66,12 @@ const CarouselIndicator: React.FC<{
   const { width } = useWindowDimensions();
 
   const styles = useAnimatedStyle(() => {
+    const size = 8 + 1;
+    const distance = width * 2 - (10 + size) * 10;
     const translateX = interpolate(
       selectedIndex.value,
       [0, albums.length],
-      [width * 2 - (5 + 8) * 10, (width * 2 - (5 + 8) * 10) * -1]
+      [distance, distance * -1]
     );
 
     return {
