@@ -25,6 +25,12 @@ target 'mediamonkpl' do
   post_install do |installer|
     react_native_post_install(installer)
 
+    installer.pods_project.targets.each do |t|
+      t.build_configurations.each do |config|
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'
+      end
+    end
+
     # Workaround `Cycle inside FBReactNativeSpec` error for react-native 0.64
     # Reference: https://github.com/software-mansion/react-native-screens/issues/842#issuecomment-812543933
     installer.pods_project.targets.each do |target|
